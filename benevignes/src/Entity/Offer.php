@@ -24,7 +24,7 @@ class Offer
     /**
      * @ORM\Column(type="datetime")
      */
-    private $dateend;
+    private $enddate;
 
     /**
      * @ORM\Column(type="boolean")
@@ -63,14 +63,14 @@ class Offer
         return $this;
     }
 
-    public function getDateend(): ?\DateTimeInterface
+    public function getEnddate(): ?\DateTimeInterface
     {
-        return $this->dateend;
+        return $this->enddate;
     }
 
-    public function setDateend(\DateTimeInterface $dateend): self
+    public function setEnddate(\DateTimeInterface $enddate): self
     {
-        $this->dateend = $dateend;
+        $this->enddate = $enddate;
 
         return $this;
     }

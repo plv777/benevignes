@@ -42,7 +42,7 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=14)
+     * @ORM\Column(type="string", length=14, options={"fixed"="true"})
      */
     private $phone;
 
@@ -52,7 +52,7 @@ class User
     private $address;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=5, options={"fixed"="true"})
      */
     private $zipcode;
 
