@@ -1,0 +1,71 @@
+header {
+
+    height: 12%;
+    min-height: 165px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#logo {
+/* 
+    height: 100%;
+    width: auto; */
+    border-radius: 20px;
+    width: 200px;
+    height: 145px;
+    margin-left:235px;
+}
+
+header #logo-home {
+
+    width:50px;
+    height:50px;
+    cursor:pointer;
+    padding-right: 25px;
+}
+
+header figure {
+
+    margin:0;
+}
+
+#contains-header {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header h2 {
+
+    margin:0;
+    text-align: center;
+}
+
+.group-by {
+
+    padding: 0 5%;
+}
+
+.group-by a {
+    margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px; 
+    text-align: center;
+    background:#000;
+    color:#fff;
+    padding:5px 10px;
+    border-radius: 5px;
+    border:1px solid #000;
+    transition:.5s linear;
+}
+
+.group-by a:hover {
+    
+    border:1px solid #000;
+    color:#000;
+    background: rgba(255,255,255,.7) ;
+    box-shadow:  3px 4px 5px #000;
+}
