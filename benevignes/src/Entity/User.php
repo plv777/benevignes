@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,54 +19,14 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=60)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=60)
-     */
-    private $firstname;
-
-    /**
      * @ORM\Column(type="string", length=320)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $winearea;
-
-    /**
      * @ORM\Column(type="string", length=60)
      */
     private $password;
-
-    /**
-     * @ORM\Column(type="string", length=14, options={"fixed"="true"})
-     */
-    private $phone;
-
-    /**
-     * @ORM\Column(type="string", length=350)
-     */
-    private $address;
-
-    /**
-     * @ORM\Column(type="string", length=5, options={"fixed"="true"})
-     */
-    private $zipcode;
-
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $offer;
 
     /**
      * @ORM\Column(type="boolean")
@@ -76,33 +38,45 @@ class User
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $activeToken;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="owner", orphanRemoval=true)
+     */
+    private $offers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RequestOffer", mappedBy="author", orphanRemoval=true)
+     */
+    private $requestOffers;
+
+    /**
+     * @ORM\Column(type="string", length=25, nullable=true)
+     */
+    private $wineArea;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $firstName;
+
+    public function __construct()
+    {
+        $this->offers = new ArrayCollection();
+        $this->requestOffers = new ArrayCollection();
+    }
+
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -117,18 +91,6 @@ class User
         return $this;
     }
 
-    public function getWinearea(): ?string
-    {
-        return $this->winearea;
-    }
-
-    public function setWinearea(?string $winearea): self
-    {
-        $this->winearea = $winearea;
-
-        return $this;
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -137,66 +99,6 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getPhone(): ?string
-    {
-        return $this->phone;
-    }
-
-    public function setPhone(string $phone): self
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?string
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(string $zipcode): self
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getOffer(): ?int
-    {
-        return $this->offer;
-    }
-
-    public function setOffer(?int $offer): self
-    {
-        $this->offer = $offer;
 
         return $this;
     }
@@ -221,6 +123,116 @@ class User
     public function setType(int $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getActiveToken(): ?string
+    {
+        return $this->activeToken;
+    }
+
+    public function setActiveToken(string $activeToken): self
+    {
+        $this->activeToken = $activeToken;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getOwner() === $this) {
+                $offer->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RequestOffer[]
+     */
+    public function getRequestOffers(): Collection
+    {
+        return $this->requestOffers;
+    }
+
+    public function addRequestOffer(RequestOffer $requestOffer): self
+    {
+        if (!$this->requestOffers->contains($requestOffer)) {
+            $this->requestOffers[] = $requestOffer;
+            $requestOffer->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestOffer(RequestOffer $requestOffer): self
+    {
+        if ($this->requestOffers->contains($requestOffer)) {
+            $this->requestOffers->removeElement($requestOffer);
+            // set the owning side to null (unless already changed)
+            if ($requestOffer->getAuthor() === $this) {
+                $requestOffer->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getWineArea(): ?string
+    {
+        return $this->wineArea;
+    }
+
+    public function setWineArea(?string $wineArea): self
+    {
+        $this->wineArea = $wineArea;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(string $firstName): self
+    {
+        $this->firstName = $firstName;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,82 +21,76 @@ class Offer
     /**
      * @ORM\Column(type="datetime")
      */
-    private $startdate;
+    private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $enddate;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $user;
+    private $endDate;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $state;
+    private $status;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=1000)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $owner;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\RequestOffer", mappedBy="offer", orphanRemoval=true)
+     */
+    private $requestOffers;
+
+    public function __construct()
+    {
+        $this->requestOffers = new ArrayCollection();
+    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getStartdate(): ?\DateTimeInterface
+    public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->startdate;
+        return $this->startDate;
     }
 
-    public function setStartdate(\DateTimeInterface $startdate): self
+    public function setStartDate(\DateTimeInterface $startDate): self
     {
-        $this->startdate = $startdate;
+        $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEnddate(): ?\DateTimeInterface
+    public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->enddate;
+        return $this->endDate;
     }
 
-    public function setEnddate(\DateTimeInterface $enddate): self
+    public function setEndDate(\DateTimeInterface $endDate): self
     {
-        $this->enddate = $enddate;
+        $this->endDate = $endDate;
 
         return $this;
     }
 
-    public function getUser(): ?bool
+    public function getStatus(): ?int
     {
-        return $this->user;
+        return $this->status;
     }
 
-    public function setUser(bool $user): self
+    public function setStatus(int $status): self
     {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    public function getState(): ?int
-    {
-        return $this->state;
-    }
-
-    public function setState(int $state): self
-    {
-        $this->state = $state;
+        $this->status = $status;
 
         return $this;
     }
@@ -111,14 +107,45 @@ class Offer
         return $this;
     }
 
-    public function getOwner(): ?int
+    public function getOwner(): ?User
     {
         return $this->owner;
     }
 
-    public function setOwner(int $owner): self
+    public function setOwner(?User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RequestOffer[]
+     */
+    public function getRequestOffers(): Collection
+    {
+        return $this->requestOffers;
+    }
+
+    public function addRequestOffer(RequestOffer $requestOffer): self
+    {
+        if (!$this->requestOffers->contains($requestOffer)) {
+            $this->requestOffers[] = $requestOffer;
+            $requestOffer->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRequestOffer(RequestOffer $requestOffer): self
+    {
+        if ($this->requestOffers->contains($requestOffer)) {
+            $this->requestOffers->removeElement($requestOffer);
+            // set the owning side to null (unless already changed)
+            if ($requestOffer->getOffer() === $this) {
+                $requestOffer->setOffer(null);
+            }
+        }
 
         return $this;
     }

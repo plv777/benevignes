@@ -17,9 +17,10 @@ class RequestOffer
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="requestOffers")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $iduser;
+    private $author;
 
     /**
      * @ORM\Column(type="datetime")
@@ -27,28 +28,29 @@ class RequestOffer
     private $date;
 
     /**
-     * @ORM\Column(type="string", length=300, nullable=true)
+     * @ORM\Column(type="string", length=500)
      */
     private $message;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Offer", inversedBy="requestOffers")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $idOffer;
+    private $offer;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getIduser(): ?int
+    public function getAuthor(): ?User
     {
-        return $this->iduser;
+        return $this->author;
     }
 
-    public function setIduser(int $iduser): self
+    public function setAuthor(?User $author): self
     {
-        $this->iduser = $iduser;
+        $this->author = $author;
 
         return $this;
     }
@@ -70,21 +72,21 @@ class RequestOffer
         return $this->message;
     }
 
-    public function setMessage(?string $message): self
+    public function setMessage(string $message): self
     {
         $this->message = $message;
 
         return $this;
     }
 
-    public function getIdOffer(): ?int
+    public function getOffer(): ?Offer
     {
-        return $this->idOffer;
+        return $this->offer;
     }
 
-    public function setIdOffer(int $idOffer): self
+    public function setOffer(?Offer $offer): self
     {
-        $this->idOffer = $idOffer;
+        $this->offer = $offer;
 
         return $this;
     }
