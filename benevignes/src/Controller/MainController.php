@@ -17,10 +17,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException ;
 use Symfony\Component\HttpKernel\Exception\HttpException ;
 use Symfony\Component\Finder\Exception\AccessDeniedException ;
 /**
- * @ Route("/maincontroller")
- * rajoute le préfixe /maincontroller devant toutes les routes
- * de la classe MainController
- * 
+ * @ Route("/benevigne/")
  * la classe a le nom du fichier .php
  */
 class MainController extends Controller {
@@ -30,9 +27,11 @@ class MainController extends Controller {
      */
     public function index() {
 
-        // dump($user->nu
+        
         return ($this->render("index.html.twig")) ;
+
     }
+
     /**
      * @Route("/indexVolunteer/", name="indexVolunteer")
      * donner une URL & un nom
@@ -42,6 +41,7 @@ class MainController extends Controller {
         // dump($user->nu
         return ($this->render("indexVolunteer.html.twig")) ;
     }
+
     /**
      * @Route("/indexWinemaker/", name="indexWinemaker")
      * donner une URL & un nom
@@ -51,6 +51,7 @@ class MainController extends Controller {
         // dump($user->nu
         return ($this->render("indexWinemaker.html.twig")) ;
     }
+
     /**
      * @Route("/indexAdmin/", name="indexAdmin")
      * donner une URL & un nom
@@ -69,6 +70,7 @@ class MainController extends Controller {
         
         return $this->render("registerWinemaker.html.twig") ;
     }
+
     /**
      * @Route("/registerVolunteer/", name="registerVolunteer")
      * chemin pour trouver cette page
@@ -85,7 +87,8 @@ class MainController extends Controller {
     public function connect() {
         
         return $this->render("connect.html.twig") ;
-    }    
+    }
+
     /**
      * @Route("/disconnect/", name="disconnect")
      */
@@ -94,19 +97,22 @@ class MainController extends Controller {
         return $this->render("disconnect.html.twig") ;
 
     }
+
     /**
-     * @Route("/activate/", name="activate")
+     * @Route("/activate/{token}", name="activate" , requirements={"token"="[a-zA-Z\d]{32}"} )
      * chemin pour trouver cette page
      */
-    public function activate() {
+    public function activate($token) {
         return $this->render("activate.html.twig") ;
     }
+
     /**
-     * @Route("/remove/", name="remove")
+     * @Route("/remove/{id}", name="remove" , requirements={"id"="\d{1,11}"})
      */
-    public function remove() {
+    public function remove($id) {
         return $this->render("remove.html.twig") ;
     }
+
     /**
      * @Route("/reinit/", name="reinit")
      */
@@ -171,6 +177,5 @@ class MainController extends Controller {
         return $this->render("adminWinemaker.html.twig") ;
 
     }
-
 
 }

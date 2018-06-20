@@ -1,0 +1,33 @@
+h1 {
+    text-align: center;
+    color:#fff;
+}
+
+main {
+
+    background:url("../images/register/volunteer/bg.jpg") ;
+    background-size: cover;
+    height: 100%;
+    
+}
+
+#wrapper-bg {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+
+    border-radius: 10px;
+    background:rgba(255,255,255,.7);
+    overflow: hidden;
+
+}
+
+#wrapper-bg{
+
+    height: 100%;
+    background: rgba(0,0,0,.4);
+}

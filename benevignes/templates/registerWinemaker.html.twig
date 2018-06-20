@@ -1,0 +1,67 @@
+{% extends "base.html.twig" %} 
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{asset("css/form.css")}}">
+    <link rel="stylesheet" href="{{asset("css/registerWinemaker.css")}}">
+    <link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet"> 
+{% endblock %}
+
+{% block title %}Inscription Vignerons{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <div id="contains-winemaker">
+
+            
+            <form method="POST">
+
+                <h1>Inscription des Vignerons</h1>
+
+                {% include 'contains_form.html.twig' %}
+            
+                <div>
+                    
+                    <select name="region" id="region">
+                        
+                        <option value="XX">Region Viticole</option>
+                        <option value="alsace">Alsace</option>
+                        <option value="beaujolais">Beaujolais</option>
+                        <option value="bordeaux">Bordeaux</option>
+                        <option value="bourgogne">Bourgogne</option>
+                        <option value="cotes-rhones">Côtes du Rhônes</option>
+                        <option value="jura">jura</option>
+                        <option value="languedoc-roussillon">Languedoc Roussillon</option>
+                        <option value="champagne-ardenne">Champagne-Ardenne</option>
+                        <option value="loire">Loire</option>
+                        <option value="lorraine">Lorraine</option>
+                        <option value="corse">Provence Corse</option>
+                        <option value="sud-ouest">Sud-Ouest</option>
+                        <option value="autre">Autre</option>
+                    
+                    </select>
+                    <span class="notif-form" id="region"></span>
+                </div>
+            
+                <div class="g-recaptcha" data-sitekey="6Leltl8UAAAAABqs2uXjhXhfgxBuHmYxAMw2xVAE"></div>
+            
+                <div>
+                    <button type="submit">je m'inscris</button>
+                </div>
+                
+            </form>
+        
+        </div>
+
+    </main>
+    
+    {% endblock %}
+
+    
+{% block javascripts %}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="{{asset("js/form.js")}}"></script>
+{% endblock %}

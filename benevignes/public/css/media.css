@@ -1,0 +1,164 @@
+/** 
+*   media.css
+*   ---------
+*
+*   Fichier css ne contenant les propriétés relative au média queries CSS ,
+*   de la largeur à la heuteur par ordre croissant de size screen ,
+*   
+*   media.css et le derniers fichiers css appelé par base.html.twig ;
+*/
+
+/**
+@media screen and (max-width:800px){
+
+    header {
+        ...
+    }
+
+    ... {
+
+        ...
+    }
+}
+
+@media screen and (max-height:450px){
+
+    header {
+        ...
+    }
+
+    ... {
+
+        ...
+    }
+}
+*/
+
+
+@media screen and (max-width:780px) {
+
+    .notif-form {
+
+        font-size: 1em;
+    }
+
+    header , #contains-header{
+
+        height: 12%;
+        min-height: 125px;
+    }
+    header #logo-benevigne {
+
+        height: 125px;
+    }
+    header h2 {
+
+        font-size:1.1em;
+    }
+
+    .group-by div a {
+
+        padding: 2px 5px;
+        height: 20px;
+        font-size:.8em;
+    }
+
+    header #logo-home {
+
+        height: 30px;
+        width: 30px; 
+    }
+
+}
+
+@media screen and (max-width:648px) {
+
+    
+    .notif-form {
+
+        font-size: .9em;
+    }
+
+    header h2 {
+
+        font-size:.88em;
+    }
+
+    header .group-by div a {
+
+        font-size:.73em;
+    }
+
+    header figure #logo-home {
+
+        width:25px;
+        height: 25px;
+    }
+
+    header , #contains-header {
+
+        height: 110px;
+    }
+
+    header #logo-benevigne {
+
+        height: 110px;
+    }
+}
+
+
+@media screen and (max-width:490px) {
+
+    
+    .notif-form {
+
+        font-size: .7em;
+    }
+
+    header figure:last-child {
+
+        display:none;
+    }
+
+    form input {
+
+        width:88%;
+    }
+    form {
+        width:100%;
+        padding-right: 10px;
+    }
+}
+
+
+@media screen and (max-height:640px) {
+
+    form button {
+
+        width: 90px;
+        height: 28px;
+        padding: 3px 6px;
+        font-size:.75em;
+    }
+
+    form div {
+
+        margin:10px 0;
+
+    }
+
+    form div label {
+
+        font-size:.82em;
+    }
+    form div input {
+
+        font-size:.7em;
+        border-bottom:1px solid #000;
+
+    }
+    form input:focus {
+
+        border-bottom:1px solid #1b95e0;
+    }
+} 

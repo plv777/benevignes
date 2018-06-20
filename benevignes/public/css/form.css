@@ -1,0 +1,79 @@
+
+@keyframes animeInput {
+
+    from {
+        width: 1%;
+    }
+
+    to {
+
+        width: 100%;
+    }
+}
+
+form {
+    margin-left: 50%;
+    transform:translateX(-50%);
+    width: 40%;
+    min-width: 320px;
+    padding:10px 30px;
+    display: none;
+}
+form input {
+
+    background:  rgba(255,255,255,0);
+    display: block;
+    border:none;
+    width: 100%;
+    border-bottom:2px solid #000;
+}
+
+form input:focus {
+
+    border-color:#1b95e0;
+    animation:animeInput .7s linear;
+}
+
+form div {
+
+    margin:20px 0;
+}
+
+.ion-eye , .ion-eye-disabled{
+
+    color:#1b95e0;
+    font-size:1.5em;
+    cursor:pointer;
+    margin-right:10px;
+}
+
+form button {
+
+    border:none;
+
+    background:rgba(0,0,0,0);
+    padding:3px 6px; 
+    width: 120px;
+    height: 40px;
+    cursor:pointer;
+    border:1px solid #2dba4e;
+    transition:.5s linear;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+form button:hover {
+
+    background:#2dba4e;
+    color: #fff ;
+}
+
+.notif-form {
+
+    background:#FF2825;
+    color:#fff;
+    font-family: 'Unica One' ;
+    font-weight: normal;
+    line-height: 1.8;
+    font-size:1.5em;
+}

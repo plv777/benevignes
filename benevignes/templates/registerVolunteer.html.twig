@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %} 
+
+{% block title %}Inscription Bénévoles{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{asset("css/form.css")}}">
+    <link rel="stylesheet" href="{{asset("css/registerVolunteer.css")}}">
+{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <div id="wrapper-bg">
+            
+            <h1>Inscription des bénévoles</h1>
+            
+            <form method="POST">
+
+                {% include 'contains_form.html.twig' %}
+            
+                <div class="g-recaptcha" data-sitekey="6Leltl8UAAAAABqs2uXjhXhfgxBuHmYxAMw2xVAE"></div>
+    
+                <div>
+                    <button type="submit">je m'inscris</button>
+                </div>            
+
+            </form>
+        
+        </div>
+    </main>
+    
+    {% endblock %}
+    
+    {% block javascripts %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="{{asset("js/form.js")}}"></script>
+    {% endblock %}
